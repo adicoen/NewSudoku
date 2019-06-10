@@ -1,0 +1,4 @@
+#Wed May 22 11:27:21 IDT 2019
+base.0=/Users/eddiecohen/StudioProjects/Sudoku/app/build/intermediates/dex/release/mergeDexRelease/out
+path.0=classes.dex
+renamed.0=classes.dex
