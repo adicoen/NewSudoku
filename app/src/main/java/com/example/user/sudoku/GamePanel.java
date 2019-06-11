@@ -1,6 +1,8 @@
 package com.example.user.sudoku;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -12,6 +14,8 @@ import android.view.SurfaceView;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+
+    MyBroadcastReciever myBroadcastReciever = new MyBroadcastReciever();
 
     public static int WIDTH;
     public static int HEIGHT;
@@ -35,8 +39,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         setWIDTH(WIDTH);
         setHEIGHT(HEIGHT);
 
-        this.WIDTH = WIDTH;
-        this.HEIGHT = HEIGHT;
+        GamePanel.WIDTH = WIDTH;
+        GamePanel.HEIGHT = HEIGHT;
 
 
         getHolder().addCallback(this);
@@ -55,13 +59,28 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         return HEIGHT;
     }
 
-
     public static void setHEIGHT(int HEIGHT) {
         GamePanel.HEIGHT = HEIGHT;
     }
 
+/*
+    @Override
+    protected void onStart() {
+        super.onStart();
+        intentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
+        registerReciever(myBroadcastReciever, filter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReciever(myBroadcastReciever);
+    }
+    */
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+
         surfaceHolder = this.getHolder();
         fullBoard = new FullBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9csk),
                 359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
@@ -137,7 +156,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public FullBoard getFullBoard() {
         return fullBoard;
     }
-    public HalfBoard getHalfBoard() { return halfBoard; }
-    public EmptyBoard getemptyBoard() { return emptyBoard; }
+
+    public HalfBoard getHalfBoard() {
+        return halfBoard;
+    }
+
+    public EmptyBoard getemptyBoard() {
+        return emptyBoard;
+    }
 
 }

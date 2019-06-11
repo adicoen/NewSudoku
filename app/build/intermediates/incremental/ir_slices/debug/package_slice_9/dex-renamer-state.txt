@@ -1,4 +1,0 @@
-#Sun Jun 02 11:40:17 IDT 2019
-base.0=/Users/eddiecohen/StudioProjects/Sudoku/app/build/intermediates/transforms/dexMerger/debug/9
-path.0=classes.dex
-renamed.0=classes.dex

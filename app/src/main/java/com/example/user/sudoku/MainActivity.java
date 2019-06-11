@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (buttons[i].getText() == "")
                 break;
             count = Integer.parseInt(buttons[i].getText().toString());
-            //if (count == 405 && i >= 89)
-            //    startActivity(new Intent(MainActivity.this, Highscores.class));
+            if (count == 405 && i >= 89)
+                startActivity(new Intent(MainActivity.this, Highscore.class));
         }
     }
 }

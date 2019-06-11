@@ -1393,6 +1393,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_game_menu
 layout activity_highscore
+layout activity_instructions
 layout content_game_menu
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -1480,6 +1481,7 @@ string search_menu_title
 string status_bar_notification_info_overflow
 string sudoku
 string title_activity_game_menu
+string title_activity_instructions
 string todo
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

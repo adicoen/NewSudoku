@@ -18,12 +18,6 @@ public class GameMenu extends AppCompatActivity {
         return true;
     }
 
-    @Override
-
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +37,7 @@ public class GameMenu extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(GameMenu.this, MainActivity.class));
             }
-        });;
+        });
     }
 }
 

@@ -25,6 +25,13 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <receiver android:name=".MyBroadcastReciever">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
