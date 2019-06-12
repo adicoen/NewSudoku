@@ -15,7 +15,6 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
-    MyBroadcastReciever myBroadcastReciever = new MyBroadcastReciever();
 
     public static int WIDTH;
     public static int HEIGHT;
@@ -63,20 +62,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         GamePanel.HEIGHT = HEIGHT;
     }
 
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        intentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
-        registerReciever(myBroadcastReciever, filter);
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        unregisterReciever(myBroadcastReciever);
-    }
-    */
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
