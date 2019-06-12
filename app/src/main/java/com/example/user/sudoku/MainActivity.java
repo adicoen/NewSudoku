@@ -1,25 +1,21 @@
 package com.example.user.sudoku;
-
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
-
+import android.content.IntentFilter;
 
 
 
 
 //finished
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    int score = 0;
+    int score= 0;
     Button[] buttons;
-    MyBroadcastReciever myBroadcastReciever = new MyBroadcastReciever();
     Button button;
     Button[] given;
     int[] nums;
@@ -27,6 +23,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String value = "1";
     TextView text;
     int count = 0;
+
+    MyBroadcastReciever myBroadcastReciever = new MyBroadcastReciever();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,19 +110,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, Highscore.class));
         }
         score++;
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
-        registerReciever(myBroadcastReciever);
+        registerReceiver(myBroadcastReciever, filter);
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        unregisterReciever(myBroadcastReciever);
+        unregisterReceiver(myBroadcastReciever);
+
     }
+
+
 }
