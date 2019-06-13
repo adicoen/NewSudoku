@@ -1,5 +1,7 @@
 package com.example.user.sudoku;
+
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,23 +12,19 @@ import android.widget.TextView;
 import android.content.IntentFilter;
 
 
-
-
 //finished
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    int score= 0;
+    int score = 0;
     Button[] buttons;
     Button button;
     Button[] given;
     int[] nums;
     TableLayout board, bar;
     String value = "1";
-    TextView text;
+    TextView text, scoreView;
     int count = 0;
-
+    String name;
     MyBroadcastReciever myBroadcastReciever = new MyBroadcastReciever();
-
-
 
 
     @Override
@@ -52,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             given[i].setTextColor(Color.parseColor("#5e6c82"));
             given[i].setEnabled(false);
         }
+        scoreView = findViewById(R.id.textView6);
     }
 
     @Override
@@ -107,9 +106,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             count = Integer.parseInt(buttons[i].getText().toString());
             if (count == 405 && i >= 89)
-                startActivity(new Intent(MainActivity.this, Highscore.class));
+                onFinish(score);
         }
         score++;
+        scoreView.setText("Click Score" + score);
+    }
+
+    public void onFinish(int score) {
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("lastScore", score);
+        editor.apply();
+        startActivity(new Intent(MainActivity.this, Highscore.class));
+        finish();
     }
 
     @Override
@@ -117,15 +126,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         IntentFilter filter = new IntentFilter(Intent.ACTION_BATTERY_LOW);
         registerReceiver(myBroadcastReciever, filter);
-
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(myBroadcastReciever);
-
     }
-
 
 }

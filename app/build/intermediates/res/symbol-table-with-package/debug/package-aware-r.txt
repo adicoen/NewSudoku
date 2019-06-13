@@ -1087,7 +1087,6 @@ id button16
 id button17
 id button18
 id button19
-id button2
 id button20
 id button21
 id button22

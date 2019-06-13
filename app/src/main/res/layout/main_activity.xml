@@ -620,5 +620,13 @@
         android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="@+id/scrollView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />z
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        tools:layout_editor_absoluteX="201dp"
+        tools:layout_editor_absoluteY="591dp" />z
 </android.support.constraint.ConstraintLayout>

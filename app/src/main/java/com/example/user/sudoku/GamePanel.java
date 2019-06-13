@@ -8,9 +8,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+
+import static android.support.v4.content.ContextCompat.startActivity;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
@@ -63,23 +66,45 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
 
-
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
         surfaceHolder = this.getHolder();
         fullBoard = new FullBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9csk),
-                359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
+                359, 359, 2 * WIDTH, 2 * HEIGHT);
 
 
-        halfBoard = new HalfBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9csk),
+        halfBoard = new HalfBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cska),
                 359, 359, 2 * WIDTH, 2 * HEIGHT);
 
         emptyBoard = new EmptyBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cskb),
-                359, 359, 2 * WIDTH, 2 * HEIGHT);
+                359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
 
         this.update();
         this.draw(canvas);
+
+        SystemClock.sleep(2000);
+
+        emptyBoard.setX(2 * WIDTH);
+        emptyBoard.setY(2 * HEIGHT);
+
+        halfBoard.setX(WIDTH / 2 + 200);
+        halfBoard.setY(HEIGHT / 2 + 200);
+
+        this.update();
+        this.draw(canvas);
+
+        SystemClock.sleep(2000);
+
+        halfBoard.setX(2 * WIDTH);
+        halfBoard.setY(2 * HEIGHT);
+
+        fullBoard.setX(WIDTH / 2 + 200);
+        fullBoard.setY(HEIGHT / 2 + 200);
+
+        this.update();
+        this.draw(canvas);
+
     }
 
     @Override
@@ -94,28 +119,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-
-        int xPosition = (int) event.getX();
-        int yPosition = (int) event.getY();
-
-        if (Math.sqrt(Math.pow((WIDTH / 2 + 200) - xPosition, 2) + Math.pow((HEIGHT / 2 + 200) - yPosition, 2)) <= 255) {
-            if (emptyBoard.getX() == WIDTH / 2 + 200) {
-                emptyBoard.setX(2 * WIDTH);
-                emptyBoard.setY(2 * HEIGHT);
-                halfBoard.setX(WIDTH / 2 + 200);
-                halfBoard.setY(HEIGHT / 2 + 200);
-            } else if (halfBoard.getX() == WIDTH / 2 + 200) {
-                halfBoard.setX(2 * WIDTH);
-                halfBoard.setY(2 * HEIGHT);
-                fullBoard.setX(WIDTH / 2 + 200);
-                fullBoard.setY(HEIGHT / 2 + 200);
-            } else {
-                fullBoard.setX(2 * WIDTH);
-                fullBoard.setY(2 * HEIGHT);
-                emptyBoard.setX(WIDTH / 2 + 200);
-                emptyBoard.setY(HEIGHT / 2 + 200);
-            }
-        }
 
         this.update();
         this.draw(canvas);
