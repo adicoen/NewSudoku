@@ -1,6 +1,7 @@
 package com.example.user.sudoku;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 public class EmptyBoard extends GameObject {
     private int x;
@@ -11,6 +12,11 @@ public class EmptyBoard extends GameObject {
         this.x = x;
         this.y = y;
     }
+
+    public void draw(Canvas canvas) {
+        canvas.drawBitmap(image, x, y, null);
+    }//end draw
+
 
     public int getX() {
         return x;

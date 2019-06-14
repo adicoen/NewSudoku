@@ -56,31 +56,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         return super.onTouchEvent(event);
     }
 
-    @Override
-    public void draw(Canvas canvas) {
-
-        surfaceHolder = this.getHolder();
-        //we lock/point canvas to our content view
-        canvas = surfaceHolder.lockCanvas();
-
-        // call the super class
-        super.draw(canvas);
-
-        // This is the color ( background color) of our canvas
-        canvas.drawColor(Color.GRAY);
-
-        emptyBoard.draw(canvas);
-
-        halfBoard.draw(canvas);
-
-        fullBoard.draw(canvas);
-
-
-        // unlock from content view, and post the draw - draw it !!!
-        surfaceHolder.unlockCanvasAndPost(canvas);
-
-    }//end draw
-
 
     public void drawText(Canvas canvas) {
 
@@ -112,7 +87,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         emptyBoard = new EmptyBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cskb),
                 359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
 
-        emptyBoard.setX((WIDTH - 359) / 2);
+
         emptyBoard.setY(100);
 
         halfBoard.setX((WIDTH - 359) / 2);
@@ -122,8 +97,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         fullBoard.setY(100 + 380 + 380);
 
         this.draw(canvas);
-
-
     }
 
     @Override
@@ -135,4 +108,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
 
     }
+
+    @Override
+    public void draw(Canvas canvas) {
+
+        surfaceHolder = this.getHolder();
+        //we lock/point canvas to our content view
+        canvas = surfaceHolder.lockCanvas();
+
+        // call the super class
+        super.draw(canvas);
+
+        // This is the color ( background color) of our canvas
+        canvas.drawColor(Color.GRAY);
+
+        emptyBoard.draw(canvas);
+
+        halfBoard.draw(canvas);
+
+        fullBoard.draw(canvas);
+
+
+        // unlock from content view, and post the draw - draw it !!!
+        surfaceHolder.unlockCanvasAndPost(canvas);
+
+    }//end draw
+
 }
