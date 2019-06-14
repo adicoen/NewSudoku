@@ -1,10 +1,10 @@
 package com.example.user.sudoku;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -35,11 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public GamePanel(Context context, int WIDTH, int HEIGHT) {
         super(context);
 
-        gameLogic = new GameLogic(this);
 
-
-        setWIDTH(WIDTH);
-        setHEIGHT(HEIGHT);
 
         GamePanel.WIDTH = WIDTH;
         GamePanel.HEIGHT = HEIGHT;
@@ -49,91 +45,41 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    public static int getWIDTH() {
-        return WIDTH;
-    }
 
-    public static void setWIDTH(int WIDTH) {
-        GamePanel.WIDTH = WIDTH;
-    }
-
-    public static int getHEIGHT() {
-        return HEIGHT;
-    }
-
-    public static void setHEIGHT(int HEIGHT) {
-        GamePanel.HEIGHT = HEIGHT;
-    }
-
-
-    @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-
-        surfaceHolder = this.getHolder();
-        fullBoard = new FullBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9csk),
-                359, 359, 2 * WIDTH, 2 * HEIGHT);
-
-
-        halfBoard = new HalfBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cska),
-                359, 359, 2 * WIDTH, 2 * HEIGHT);
-
-        emptyBoard = new EmptyBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cskb),
-                359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
-
-        this.update();
-        this.draw(canvas);
-
-        SystemClock.sleep(2000);
-
-        emptyBoard.setX(2 * WIDTH);
-        emptyBoard.setY(2 * HEIGHT);
-
-        halfBoard.setX(WIDTH / 2 + 200);
-        halfBoard.setY(HEIGHT / 2 + 200);
-
-        this.update();
-        this.draw(canvas);
-
-        SystemClock.sleep(2000);
-
-        halfBoard.setX(2 * WIDTH);
-        halfBoard.setY(2 * HEIGHT);
-
-        fullBoard.setX(WIDTH / 2 + 200);
-        fullBoard.setY(HEIGHT / 2 + 200);
-
-        this.update();
-        this.draw(canvas);
-
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
 
-        this.update();
-        this.draw(canvas);
+        //this.draw(canvas);
 
         return super.onTouchEvent(event);
     }
 
-    public void update() {
-        fullBoard.update();
-        halfBoard.update();
-        emptyBoard.update();
-        gameLogic.check_Logic();
+    @Override
+    public void draw(Canvas canvas) {
+
+        surfaceHolder = this.getHolder();
+        //we lock/point canvas to our content view
+        canvas = surfaceHolder.lockCanvas();
+
+        // call the super class
+        super.draw(canvas);
+
+        // This is the color ( background color) of our canvas
+        canvas.drawColor(Color.GRAY);
+
+        emptyBoard.draw(canvas);
+
+        halfBoard.draw(canvas);
+
+        fullBoard.draw(canvas);
 
 
-    }
+        // unlock from content view, and post the draw - draw it !!!
+        surfaceHolder.unlockCanvasAndPost(canvas);
+
+    }//end draw
 
 
     public void drawText(Canvas canvas) {
@@ -154,4 +100,39 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         return emptyBoard;
     }
 
+    @Override
+    public void surfaceCreated(SurfaceHolder surfaceHolder) {
+
+        fullBoard = new FullBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9csk),
+                359, 359, 2 * WIDTH, 2 * HEIGHT);
+
+        halfBoard = new HalfBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cska),
+                359, 359, 2 * WIDTH, 2 * HEIGHT);
+
+        emptyBoard = new EmptyBoard(BitmapFactory.decodeResource(getResources(), R.drawable.o9cskb),
+                359, 359, WIDTH / 2 + 200, HEIGHT / 2 + 200);
+
+        emptyBoard.setX((WIDTH - 359) / 2);
+        emptyBoard.setY(100);
+
+        halfBoard.setX((WIDTH - 359) / 2);
+        halfBoard.setY(100 + 380);
+
+        fullBoard.setX((WIDTH - 359) / 2);
+        fullBoard.setY(100 + 380 + 380);
+
+        this.draw(canvas);
+
+
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder surfaceHolder, int i, int i1, int i2) {
+
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
+
+    }
 }

@@ -23,8 +23,5 @@ public class Instructions extends AppCompatActivity {
         WIDTH = size.x;
         HEIGHT = size.y;
         setContentView(new GamePanel(this, WIDTH, HEIGHT));
-        SystemClock.sleep(4000);
-        Intent myIntent = new Intent(Instructions.this, GameMenu.class);
-        startActivity(myIntent);
     }
 }
